@@ -71,6 +71,13 @@ movie = {
   p.textContent = movie.genre;
   div.appendChild(p);
 
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.addEventListener("click", function () {
+    removeMovie(movie.id);
+  });
+  div.appendChild(deleteBtn);
+
   const listDiv = document.querySelector("#movie-list");
   listDiv.appendChild(div);
 }
@@ -81,6 +88,14 @@ function loadMovieListHTML() {
   for (const movie of movieList) {
     addMovieHTML(movie);
   }
+}
+
+function removeMovie(movieId) {
+  const indexToRemove = movieList.findIndex(function (movie) {
+    return movie.id == movieId;
+  });
+  movieList.splice(indexToRemove, 1);
+  loadMovieListHTML();
 }
 
 // start
