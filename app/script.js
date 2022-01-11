@@ -76,7 +76,43 @@ movie = {
 }
 
 function loadMovieListHTML() {
+  const listDiv = document.querySelector("#movie-list");
+  listDiv.innerHTML = "";
   for (const movie of movieList) {
     addMovieHTML(movie);
   }
 }
+
+// start
+loadMovieListHTML();
+const addMovieForm = document.querySelector("#add-movie-form");
+addMovieForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const formData = new FormData(addMovieForm);
+  /*
+  {
+    id: "1641896323528",
+    name: "The Hurlocker",
+    year: 1998,
+    genre: "War, Drama",
+    image: {
+      url: "/images/hurlocker.jpg",
+      altInfo: "DVD cover of Hurlocker",
+    },
+  },
+  */
+  const movie = {
+    id: new Date().getTime(),
+    name: formData.get("movie-name"),
+    year: formData.get("movie-year"),
+    genre: formData.get("movie-genre"),
+    image: {
+      url: formData.get("movie-image-url"),
+      altInfo: formData.get("movie-image-alt"),
+    },
+  };
+
+  movieList.push(movie);
+  loadMovieListHTML();
+  addMovieForm.reset();
+});
