@@ -102,7 +102,7 @@ function removeMovie(movieId) {
 loadMovieListHTML();
 const addMovieForm = document.querySelector("#add-movie-form");
 addMovieForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+  //event.preventDefault();
   const formData = new FormData(addMovieForm);
   /*
   {
